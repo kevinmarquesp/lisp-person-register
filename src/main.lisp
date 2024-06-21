@@ -2,4 +2,6 @@
   (:use :cl))
 (in-package :lisp-person-register)
 
-;; blah blah blah.
+(defun start ()
+  "Will simply display a hello world message on the screen."
+  (format t "Hello world! (updated)~%"))
