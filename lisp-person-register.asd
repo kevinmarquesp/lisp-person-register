@@ -3,9 +3,10 @@
   :author ""
   :license ""
   :description ""
-  :depends-on ()
+  :depends-on ("mito")
   :components ((:module "src"
-                :components ((:file "main"))))
+                :components ((:file "constants")
+                             (:file "main"))))
   :in-order-to ((test-op (test-op "lisp-person-register/tests"))))
 
 (defsystem "lisp-person-register/tests"
