@@ -7,4 +7,4 @@
 *.x86f
 *~
 .#*
-tmp/
+database.sqlite3
