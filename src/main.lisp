@@ -10,10 +10,13 @@
 (in-package :lisp-person-register.database)
 (in-package :lisp-person-register)
 
+(defun prompt (message)
+  "Reads the user input as a string, it also allows to provide a custom prompt."
+  (format t "~a" message)
+  (finish-output)
+  (read-line nil 'eof nil))
+
 (defun start ()
-  (connect +default-path+)
-  (migrate)
-  (register "Tony Stark" 43)
-  (register "Steeve Rogers" 152)
-  (register "Thor" 39)
+  (format t "~a~%"
+    (prompt "Hello?: "))
   (format t "End.~%"))
