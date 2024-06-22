@@ -1,4 +1,5 @@
 PACKAGE_NAME = lisp-person-register
+DATABASE_PATH = database.sqlite3
 
 .PHONY: run
 run:
@@ -20,3 +21,11 @@ test:
 	            --eval '(asdf:load-system "$(PACKAGE_NAME)" :force t)' \
 	            --eval '(asdf:test-system :$(PACKAGE_NAME))' \
 	            --quit
+
+.PHONY: clean
+clean:
+	rm -vrf $(DATABASE_PATH)
+
+.PHONY: inspect
+inspect:
+	sqlite3 $(DATABASE_PATH) 'SELECT * FROM user'
