@@ -2,10 +2,10 @@
 
 (defpackage lisp-person-register.database
   (:use :cl)
-  (:export :+default-path+)
-  (:export :connect)
-  (:export :migrate)
-  (:export :register))
+  (:export #:+default-path+
+           #:connect
+           #:migrate
+           #:register))
 (in-package :lisp-person-register.database)
 
 (mito:deftable user ()

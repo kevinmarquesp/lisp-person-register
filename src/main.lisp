@@ -2,10 +2,11 @@
 
 (defpackage lisp-person-register
   (:use :cl)
-  (:import-from :lisp-person-register.database :+default-path+)
-  (:import-from :lisp-person-register.database :connect)
-  (:import-from :lisp-person-register.database :migrate)
-  (:import-from :lisp-person-register.database :register))
+  (:import-from :lisp-person-register.database
+                #:+default-path+
+                #:connect
+                #:migrate
+                #:register))
 (in-package :lisp-person-register.database)
 (in-package :lisp-person-register)
 
