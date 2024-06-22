@@ -1,23 +1,18 @@
+;;;; src/main.lisp
+
 (defpackage lisp-person-register
-  (:use :cl))
+  (:use :cl)
+  (:import-from :lisp-person-register.database :+default-path+)
+  (:import-from :lisp-person-register.database :connect)
+  (:import-from :lisp-person-register.database :migrate)
+  (:import-from :lisp-person-register.database :register))
+(in-package :lisp-person-register.database)
 (in-package :lisp-person-register)
 
-;; Constant work around from: https://stackoverflow.com/questions/34800988/sbcl-asdfload-system-fails-when-a-string-constant-is-defined
-
-(eval-when (:compile-toplevel)
-  (defconstant +database+ "tmp/database.sqlite3"
-    "Path to the SQLite3 database file, where the persons will be registered."))
-
-(mito:deftable user ()
-  ((name :col-type (:varchar 128))
-   (age :col-type :integer)))
-
-(mito:connect-toplevel :sqlite3 :database-name +database+)
-
-(mito:ensure-table-exists 'user)
-
-(mito:insert-dao
-  (make-instance 'user :name "Kevin Marques" :age 19))
-
 (defun start ()
+  (connect +default-path+)
+  (migrate)
+  (register "Tony Stark" 43)
+  (register "Steeve Rogers" 152)
+  (register "Thor" 39)
   (format t "End.~%"))

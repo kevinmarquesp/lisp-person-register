@@ -5,7 +5,8 @@
   :description ""
   :depends-on ("mito")
   :components ((:module "src"
-                :components ((:file "main"))))
+                :components ((:file "database")
+                             (:file "main"))))
   :in-order-to ((test-op (test-op "lisp-person-register/tests"))))
 
 (defsystem "lisp-person-register/tests"
