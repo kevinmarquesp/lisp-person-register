@@ -16,7 +16,14 @@
   (finish-output)
   (read-line nil 'eof nil))
 
+(defun register-action ()
+  "Ask the user to type a name and a age to be registered at the database."
+  (register
+    (prompt "[input] What is your name?  ")
+    (prompt "[input] How old are you?    ")))
+
 (defun start ()
-  (format t "~a~%"
-    (prompt "Hello?: "))
+  (connect +default-path+)
+  (migrate)
+  (register-action)
   (format t "End.~%"))
