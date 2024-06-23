@@ -31,6 +31,7 @@ test:
 .PHONY: clean
 clean:
 	rm -vrf $(DATABASE_PATH)
+	rm quicklisp.lisp
 
 .PHONY: inspect
 inspect:
