@@ -5,7 +5,8 @@
   (:export #:+default-path+
            #:connect
            #:migrate
-           #:register))
+           #:register
+           #:fetch))
 (in-package :lisp-person-register.database)
 
 (mito:deftable user ()
@@ -28,3 +29,10 @@
   "Register a new entry on the user table. Each user IS NOT unique!"
   (mito:insert-dao
     (make-instance 'user :name name :age age)))
+
+(defun fetch ()
+  "Returns a matrix of tuples with all the registered names and ages."
+  (let ((daos (mito:retrieve-dao 'user)))
+    (mapcar (lambda (dao)
+      (list (user-name dao)
+            (user-age dao))) daos)))
