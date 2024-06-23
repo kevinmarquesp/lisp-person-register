@@ -6,7 +6,8 @@
                 #:+default-path+
                 #:connect
                 #:migrate
-                #:register))
+                #:register
+                #:fetch))
 (in-package :lisp-person-register.database)
 (in-package :lisp-person-register)
 
@@ -22,8 +23,22 @@
     (prompt "[input] What is your name?  ")
     (prompt "[input] How old are you?    ")))
 
+(defun display-registered-users-table (rows)
+  "Displays all the registered users in a Markdown'ish styled table in STDOUT."
+  (format t "~%## Registered Users~%~%")
+  (format t "| Name                     | Age |~%")
+  (format t "|--------------------------|-----|~%")
+  (loop for row in rows do
+    (format t "| ~:(~24a~) | ~3a |~%" (first row)         ; Select the name.
+                                      (car (last row))))  ; Select the age.
+  (format t "~%"))
+
 (defun start ()
   (connect +default-path+)
   (migrate)
-  (register-action)
+
+  (let ((rows (fetch)))
+    (if (null rows) nil
+      (display-registered-users-table rows)))
+
   (format t "End.~%"))
