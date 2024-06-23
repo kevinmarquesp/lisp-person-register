@@ -3,21 +3,27 @@ DATABASE_PATH = database.sqlite3
 
 .PHONY: run
 run:
-	rlwrap sbcl --eval '(asdf:load-asd "$(PACKAGE_NAME).asd")' \
+	rlwrap sbcl --eval '(asdf:load-asd (merge-pathnames "$(PACKAGE_NAME).asd" (uiop:getcwd)))' \
 	            --eval '(asdf:load-system "$(PACKAGE_NAME)" :force t)' \
 	            --eval '(in-package :$(PACKAGE_NAME))' \
 	            --eval '(start)' \
 	            --quit
 
+.PHONY: deps
+deps:
+	rlwrap sbcl --eval '(asdf:load-asd (merge-pathnames "$(PACKAGE_NAME).asd" (uiop:getcwd)))' \
+	            --eval '(ql:quickload :$(PACKAGE_NAME))' \
+	            --quit
+
 .PHONY: repl
 repl:
-	rlwrap sbcl --eval '(asdf:load-asd "$(PACKAGE_NAME).asd")' \
+	rlwrap sbcl --eval '(asdf:load-asd (merge-pathnames "$(PACKAGE_NAME).asd" (uiop:getcwd)))' \
 	            --eval '(asdf:load-system "$(PACKAGE_NAME)" :force t)' \
 	            --eval '(in-package :$(PACKAGE_NAME))'
 
 .PHONY: test
 test:
-	rlwrap sbcl --eval '(asdf:load-asd "$(PACKAGE_NAME).asd")' \
+	rlwrap sbcl --eval '(asdf:load-asd (merge-pathnames "$(PACKAGE_NAME).asd" (uiop:getcwd)))' \
 	            --eval '(asdf:load-system "$(PACKAGE_NAME)" :force t)' \
 	            --eval '(asdf:test-system :$(PACKAGE_NAME))' \
 	            --quit
