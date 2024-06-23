@@ -16,5 +16,5 @@
   :depends-on ("lisp-person-register"
                "rove")
   :components ((:module "tests"
-                :components ((:file "main"))))
+                :components ((:file "database"))))
   :perform (test-op (op c) (symbol-call :rove :run c)))
